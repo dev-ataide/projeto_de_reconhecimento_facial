@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exibição de Dados</title>
+</head>
+<body>
+    <h1>Dados Recebidos</h1>
+    <div id="data"></div>
+
+    <script>
+        // Função para fazer a requisição AJAX para a rota
+        function fetchData() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:5000/recognized_faces", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    document.getElementById("data").innerHTML = "Name: " + data.name;
+                }
+            };
+            xhr.send();
+        }
+
+        // Chama a função ao carregar a página
+        window.onload = function () {
+            fetchData();
+        };
+    </script>
+</body>
+</html>
